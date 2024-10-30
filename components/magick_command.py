@@ -1,6 +1,6 @@
 import subprocess
 
-class Magick:
+class magickCli:
     @staticmethod
     def run_magick_command(command, is_print=True):
         result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -15,7 +15,7 @@ class Magick:
     @staticmethod
     def is_magick_installed():
         try:
-            Magick.run_magick_command(command = "magick -version", is_print=False)
+            magickCli.run_magick_command(command = "magick -version", is_print=False)
             return True
         except Exception as e:
             return False
