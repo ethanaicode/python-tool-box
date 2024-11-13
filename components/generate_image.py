@@ -2,7 +2,7 @@ import random
 
 from globals import APP_ROOT_DIR
 
-from components.magick_command import Magick
+from components.magick_command import magickCli
 
 class generateImage:
     def generate_image(self):
@@ -54,12 +54,13 @@ class generateImage:
         print(f"已选择字体: {text_font}\n")
         # default output file
         output_image = ''.join([APP_ROOT_DIR, f"/output/{main_text}.png"])
+        text_color = "white"
 
         # run magick command
-        command = f"magick {bg_image} +level-colors \"{bg_color},\" -gravity center -fill white -font \"{text_font}\" -pointsize {font_size} -annotate 0 \"{main_text}\" \"{output_image}\""
+        command = f"magick {bg_image} +level-colors \"{bg_color},\" -gravity center -fill \"{text_color}\" -font \"{text_font}\" -pointsize {font_size} -annotate 0 \"{main_text}\" \"{output_image}\""
 
         print(f"开始生成图片: {command}")
-        Magick.run_magick_command(command, is_print=False)
+        magickCli.run_magick_command(command, is_print=False)
         print(f"图片已生成: {output_image}")
 
     def get_font_size(self, default_size="96"):
