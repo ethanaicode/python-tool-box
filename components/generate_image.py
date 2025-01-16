@@ -29,9 +29,9 @@ class generateImage:
             "#5f889e",
         ]
         # define background grayscale image
-        bg_image_id_select = input("请选择背景图片：默认随机选择\n1. base01\n2. base02\n")
+        bg_image_id_select = input("请选择背景图片：默认随机选择\n1. base01\n2. base02\n3. base03\n")
         if bg_image_id_select == "":
-            bg_image_id_select = random.randint(1, 2)
+            bg_image_id_select = random.randint(1, 3)
         bg_image = ''.join([APP_ROOT_DIR, f"/assets/images/grayscale_base_{bg_image_id_select}.png"])
         print(f"已选择背景图片: {bg_image}\n")
         # define background color
@@ -57,7 +57,7 @@ class generateImage:
         text_color = "white"
 
         # run magick command
-        command = f"magick {bg_image} +level-colors \"{bg_color},\" -gravity center -fill \"{text_color}\" -font \"{text_font}\" -pointsize {font_size} -annotate 0 \"{main_text}\" \"{output_image}\""
+        command = f"magick {bg_image} -colorspace Gray -fill \"{bg_color}\" -tint 100 -gravity center -fill \"{text_color}\" -font \"{text_font}\" -pointsize {font_size} -annotate 0 \"{main_text}\" \"{output_image}\""
 
         print(f"开始生成图片: {command}")
         magickCli.run_magick_command(command, is_print=False)
